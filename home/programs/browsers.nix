@@ -382,7 +382,7 @@
         "*".installation_mode = "blocked";
 
         # uBlock Origin – overflow menu
-        firefox.extensionIds.uBlockOrigin = {
+        "uBlock0@raymondhill.net" = {
           install_url       = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
           installation_mode = "force_installed";
           private_browsing  = true;
@@ -390,7 +390,7 @@
         };
 
         # 1Password – pinned to toolbar
-        firefox.extensionIds._1password = {
+        "{d634138d-c276-4fc8-924b-40a0ea21d284}" = {
           install_url       = "https://addons.mozilla.org/firefox/downloads/latest/1password-x-password-manager/latest.xpi";
           installation_mode = "force_installed";
           private_browsing  = true;
@@ -398,7 +398,7 @@
         };
 
         # SimpleLogin – pinned to toolbar
-        firefox.extensionIds.simpleLogin = {
+        "addon@simplelogin" = {
           install_url       = "https://addons.mozilla.org/firefox/downloads/latest/simplelogin/latest.xpi";
           installation_mode = "force_installed";
           private_browsing  = true;
@@ -406,7 +406,7 @@
         };
 
         # SponsorBlock – overflow menu
-        firefox.extensionIds.sponsorBlock = {
+        "sponsorBlocker@ajay.app" = {
           install_url       = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
           installation_mode = "force_installed";
           private_browsing  = true;

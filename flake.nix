@@ -23,29 +23,57 @@
     ...
   } @ inputs:
     let
-      forAllSystems = nixpkgs.lib.genAttrs [
-        "x86_64-linux"
-      ];
-
       extensions = import ./extensions { inherit inputs; };
-
     in {
       nixosConfigurations = {
-        grd-laptop = nixpkgs.lib.nixosSystem {
 
-          modules = [ 
+        grd-laptop = let
+          username = "greg";
+          hostname = "grd-laptop";
+          specialArgs = {inherit username hostname; };
+        in
+          nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+            system = "x86_64-linux";
+
+            modules = [ 
+              ./system
+              ./hosts/${hostname}
+              ./users/${username}.nix
+
+              nixos-hardware.nixosModules.framework-12th-gen-intel
+              extensions.nixosModules
+
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+
+                home-manager.users.greg = import ./home/greg.nix;
+
+                home-manager.sharedModules = [
+                  plasma-manager.homeModules.plasma-manager
+                  extensions.homeManagerModules
+                  ];
+              }
+            ];
+          };
+
+        grd-workstation = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+
+          modules = [
             ./system
-            ./hosts/grd-laptop
+            ./hosts/grd-workstation
             ./users/greg.nix
-            
-            nixos-hardware.nixosModules.framework-12th-gen-intel
+
             extensions.nixosModules
 
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
- 
+
               home-manager.users.greg = import ./home/greg.nix;
 
               home-manager.sharedModules = [

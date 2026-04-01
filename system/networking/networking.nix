@@ -2,7 +2,7 @@
 
 {
   networking = {
-    hostName = "grd-laptop";
+    hostName = "grd-workstation";
     
     networkmanager = {
       enable = true;

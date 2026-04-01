@@ -31,6 +31,7 @@
     - [ ] Common extensions
     - [x] Settings (whitespace, font, etc.)
     - [ ] nix env and direnv integration
+    - [ ] Auto trust projects directory
 - [ ] Browsers
     - [ ] Default search engine: Kagi
     - [ ] Auto-open Zoom links in Zoom
@@ -43,7 +44,14 @@
 - [ ] KDE
     - [ ] Dock panel
         - [ ] Pin Firefox, terminal, chrome apps
-        - [ ] Dock sizing
+        - [x] Dock sizing
+        - [ ] Multi-monitor config
+        - [ ] Multi-monitor dock
     - [ ] Dolphin settings
         - [ ] Pinned places
         - [ ] Documents, Downloads, Music, Pictures, Projects
+- [ ] Multiple hosts
+    - [ ] Automatically figure out host name in config
+    - [ ] Conditionally enable sections based on host settings
+- [ ] Work computer
+    - [ ] Google drive integration?

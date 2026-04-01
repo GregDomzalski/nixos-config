@@ -2,6 +2,7 @@
 {
   imports = [
       ./browsers.nix
+      ./claude-code.nix
       ./git.nix
       ./obsidian.nix
       ./plasma.nix

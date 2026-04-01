@@ -18,11 +18,11 @@
     enableZshIntegration = true;
     installBatSyntax = true;
     settings = {
-      adjust-cell-height = "50%";
+      adjust-cell-height = "20%";
       adjust-cursor-thickness = "50%";
       font-family = "JetBrainsMono Nerd Font Mono";
       font-size = 12;
-      background-opacity = 0.75;
+      background-opacity = 0.85;
       background-blur = true;
       shell-integration-features = "ssh-env";
       window-show-tab-bar = "always";
