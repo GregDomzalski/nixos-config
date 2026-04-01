@@ -1,6 +1,7 @@
 { lib, inputs, outputs, ... }:
 {
   imports = [
+      ./1password.nix
       ./browsers.nix
       ./claude-code.nix
       ./git.nix
