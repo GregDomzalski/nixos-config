@@ -6,12 +6,10 @@
   };
 
   hardware.nvidia = {
-    enable = true;
-    open = true;
+    open = false;
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    nvidiaSettings = true;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];

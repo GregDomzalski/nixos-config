@@ -26,7 +26,7 @@
         - [ ] VPN roaming (auto on when outside home network)
 - [x] ZSH
     - [x] oh-my-zsh
-    - [ ] Modern shell tool replacements
+    - [x] Modern shell tool replacements
 - [ ] VSCode
     - [ ] Common extensions
     - [x] Settings (whitespace, font, etc.)

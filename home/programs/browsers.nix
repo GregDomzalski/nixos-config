@@ -17,6 +17,28 @@
       gmeet = ../../assets/icons/gmeet.svg;
       notion = ../../assets/icons/notion.svg;
     };
+
+    # Detect if we're on a system with NVIDIA GPU
+    isNvidia = config.hardware.gpu.vendor or null == "nvidia";
+
+    # Base flags for all systems
+    baseFlags = [
+      "--no-default-browser-check"
+      "--no-first-run"
+      "--enable-features=WaylandWindowDecorations"
+      "--enable-gpu-rasterization"
+      "--enable-zero-copy"
+    ];
+
+    # NVIDIA-specific flags for better Wayland+NVIDIA performance
+    nvidiaFlags = [
+      "--use-gl=desktop"
+      "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
+      "--disable-features=UseChromeOSDirectVideoDecoder"
+    ];
+
+    # Combine flags conditionally
+    allFlags = baseFlags ++ (lib.optionals isNvidia nvidiaFlags);
   in
 {
   # Set the default browser to Firefox
@@ -58,13 +80,7 @@
   programs.chromium = {
     enable = true;
 
-    commandLineArgs = [
-      "--no-default-browser-check"
-      "--no-first-run"
-      "--enable-features=WaylandWindowDecorations"
-      "--enable-gpu-rasterization"
-      "--enable-zero-copy"
-    ];
+    commandLineArgs = allFlags;
 
     extensions = [
       # uBlock Origin Lite
@@ -115,12 +131,12 @@
       PasswordManagerEnabled    = false;
       AutofillAddressEnabled    = false;
       AutofillCreditCardEnabled = false;
-    
+
       # ── Browser defaults ────────────────────────────────────────────────
       DefaultBrowserSettingEnabled = false;
 
       # ── Session restore ─────────────────────────────────────────────────
-    # 1 = Restore the last session (always, including after a crash)
+      # 1 = Restore the last session (always, including after a crash)
       RestoreOnStartup = 1;
 
       # ── Telemetry ───────────────────────────────────────────────────────
@@ -132,20 +148,20 @@
       AudioCaptureAllowedUrls = [ "https://meet.google.com" ];
 
       # ── Auto-launch Zoom protocol links without a prompt ────────────────
-    # Covers both the zoommtg:// and zoomus:// URI schemes that Zoom uses.
+      # Covers both the zoommtg:// and zoomus:// URI schemes that Zoom uses.
       AutoLaunchProtocolsFromOrigins = [
-      {
+        {
           protocol        = "zoommtg";
           allowed_origins = [ "https://zoom.us" "https://*.zoom.us" ];
-      }
-      {
+        }
+        {
           protocol        = "zoomus";
           allowed_origins = [ "https://zoom.us" "https://*.zoom.us" ];
-      }
-    ];
+        }
+      ];
 
       # ── AI / Generative AI: disable all ─────────────────────────────────
-    # These are Chrome-branded policies; open-source Chromium may ignore some.
+      # These are Chrome-branded policies; open-source Chromium may ignore some.
       # 2 = Disabled
       HelpMeWriteSettings  = 2;
       CreateThemesSettings = 2;

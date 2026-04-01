@@ -5,7 +5,7 @@ let
 in {
   nixosModules = {
     imports = [
-
+      ./modules/nixos/gpu.nix
     ];
 
     _module.args = {
