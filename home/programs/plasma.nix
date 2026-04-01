@@ -30,6 +30,7 @@
 
     panels = [
       {
+        screen = "all";
         location = "bottom";
         floating = false;
         lengthMode = "fill";
