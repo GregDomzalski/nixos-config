@@ -16,6 +16,7 @@ in {
   homeManagerModules = {
     imports = [
       ./modules/home-manager/chromium-app.nix
+      ./modules/home-manager/chromium-policies.nix
     ];
 
     _module.args = {

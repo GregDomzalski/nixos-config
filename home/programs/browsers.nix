@@ -104,63 +104,65 @@
         categories = [ "X-CriticalShift" ];
       };
     };
-  };
 
-  xdg.configFile."chromium/policies/managed/policy.json".text = builtins.toJSON {
-    # ── Passwords & autofill ──────────────────────────────────────────────
-    "PasswordManagerEnabled"    = false;
-    "AutoFillEnabled"           = false;
-    "AutofillAddressEnabled"    = false;
-    "AutofillCreditCardEnabled" = false;
+    # ─── Policies ────────────────────────────────────────────────────────
+    policies = {
+      # ── GPU & Hardware Acceleration ─────────────────────────────────────
+      HardwareAccelerationModeEnabled = true;
+      Disable3DAPIs = false;
+
+      # ── Passwords & autofill ────────────────────────────────────────────
+      PasswordManagerEnabled    = false;
+      AutofillAddressEnabled    = false;
+      AutofillCreditCardEnabled = false;
     
-    # ── Browser defaults ──────────────────────────────────────────────────
-    "DefaultBrowserSettingEnabled" = false;
+      # ── Browser defaults ────────────────────────────────────────────────
+      DefaultBrowserSettingEnabled = false;
 
-    # ── Session restore ───────────────────────────────────────────────────
+      # ── Session restore ─────────────────────────────────────────────────
     # 1 = Restore the last session (always, including after a crash)
-    "RestoreOnStartup" = 1;
+      RestoreOnStartup = 1;
 
-    # ── Telemetry ─────────────────────────────────────────────────────────
-    "MetricsReportingEnabled"    = false;
-    "SafeBrowsingSurveysEnabled" = false;
+      # ── Telemetry ───────────────────────────────────────────────────────
+      MetricsReportingEnabled    = false;
+      SafeBrowsingSurveysEnabled = false;
 
-    # ── Permissions: camera & microphone for Google Meet ──────────────────
-    "VideoCaptureAllowedUrls" = [ "https://meet.google.com" ];
-    "AudioCaptureAllowedUrls" = [ "https://meet.google.com" ];
+      # ── Permissions: camera & microphone for Google Meet ────────────────
+      VideoCaptureAllowedUrls = [ "https://meet.google.com" ];
+      AudioCaptureAllowedUrls = [ "https://meet.google.com" ];
 
-    # ── Auto-launch Zoom protocol links without a prompt ──────────────────
+      # ── Auto-launch Zoom protocol links without a prompt ────────────────
     # Covers both the zoommtg:// and zoomus:// URI schemes that Zoom uses.
-    "AutoLaunchProtocolsFromOrigins" = [
+      AutoLaunchProtocolsFromOrigins = [
       {
-        "protocol"        = "zoommtg";
-        "allowed_origins" = [ "https://zoom.us" "https://*.zoom.us" ];
+          protocol        = "zoommtg";
+          allowed_origins = [ "https://zoom.us" "https://*.zoom.us" ];
       }
       {
-        "protocol"        = "zoomus";
-        "allowed_origins" = [ "https://zoom.us" "https://*.zoom.us" ];
+          protocol        = "zoomus";
+          allowed_origins = [ "https://zoom.us" "https://*.zoom.us" ];
       }
     ];
 
-    # ── AI / Generative AI: disable all ──────────────────────────────────
+      # ── AI / Generative AI: disable all ─────────────────────────────────
     # These are Chrome-branded policies; open-source Chromium may ignore some.
-    "GenAiDefaultSettings"    = 2; # 2 = Disabled
-    "HelpMeWriteSettings"     = 2;
-    "TabOrganizerSettings"    = 2;
-    "WallpaperSearchSettings" = 2;
-    "CreateThemesSettings"    = 2;
+      # 2 = Disabled
+      HelpMeWriteSettings  = 2;
+      CreateThemesSettings = 2;
 
-    # ── Kagi as default search engine ─────────────────────────────────────
-    "DefaultSearchProviderEnabled"    = true;
-    "DefaultSearchProviderName"       = "Kagi";
-    "DefaultSearchProviderKeyword"    = "k";
-    "DefaultSearchProviderSearchURL"  = "https://kagi.com/search?q=%s";
-    "DefaultSearchProviderSuggestURL" = "https://kagi.com/api/autosuggest?q=%s";
-    "DefaultSearchProviderNewTabURL"  = "https://kagi.com";
+      # ── Kagi as default search engine ───────────────────────────────────
+      DefaultSearchProviderEnabled    = true;
+      DefaultSearchProviderName       = "Kagi";
+      DefaultSearchProviderKeyword    = "k";
+      DefaultSearchProviderSearchURL  = "https://kagi.com/search?q=%s";
+      DefaultSearchProviderSuggestURL = "https://kagi.com/api/autosuggest?q=%s";
+      DefaultSearchProviderNewTabURL  = "https://kagi.com";
 
-    # ── New tab & homepage ────────────────────────────────────────────────
-    "NewTabPageLocation"   = "https://kagi.com";
-    "HomepageIsNewTabPage" = true;
-    "HomepageLocation"     = "https://kagi.com";
+      # ── New tab & homepage ──────────────────────────────────────────────
+      NewTabPageLocation   = "https://kagi.com";
+      HomepageIsNewTabPage = true;
+      HomepageLocation     = "https://kagi.com";
+    };
   };
 
 
