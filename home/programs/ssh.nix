@@ -6,9 +6,13 @@ let
   knownHostsFile = "~/.ssh/known_hosts";
 
   pubKeys = {
+    "greg_csbuild_auth" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHcaQxIGTBMHIuS13bS8q5LRrnCnN0z5vGTDdf5ylDPK";
     "greg_github_auth" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ70ymR9G0z/gNRAwpEUleSWC0z1uhwfFEY4onbYrSiQ";
     "greg_git_signing" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPoCy9US9dPMpdoSnEChVDET0trbeWIBl6bXE59CD7x1";
     "greg_homelab_auth" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPwggmjUJ39tlgLhIMECu0ExVlco2/HqIx9d6gE1E5zf";
+    "greg_mimick_auth" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBi3sO4lWQRPNx2YMmY/TWvqa+NOvDY17+0el9MoGPod";
+    "greg_vultr_auth" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPHYyUA3MnkikQEYVJzobDhLS/kSwy7QizHw3a29JJMD";
+    "infra_mimick_auth" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJm+hqRSBuJUyp/sKwjj4MyCNidIefxi/G3Q5+jhAFQI";
   };
 
   mkPubKeyRule = name: text:
@@ -37,6 +41,12 @@ in {
     enableDefaultConfig = false;
 
     matchBlocks = {
+      "csbuild" = {
+        hostname = "csbuild.vm.gregdom.net";
+        forwardAgent = true;
+        identityFile = "/home/greg/.ssh/keys/greg_csbuild_auth.pub";
+      };
+
       "desktop" = {
         hostname = "10.10.0.141";
         forwardAgent = true;
@@ -45,10 +55,21 @@ in {
       "dockerhost" = {
         hostname = "dockerhost.vm.gregdom.net";
         identityFile = "/home/greg/.ssh/keys/greg_homelab_auth.pub";
-        extraOptions = {
-          PasswordAuthentication = "no";
-          PubkeyAuthentication = "yes";
-        };
+      };
+
+      "netstack" = {
+        hostname = "netstack.dev.gregdom.net";
+        identityFile = "/home/greg/.ssh/keys/greg_homelab_auth.pub";
+      };
+
+      "infosphere" = {
+        hostname = "infosphere.dev.gregdom.net";
+        identityFile = "/home/greg/.ssh/keys/greg_homelab_auth.pub";
+      };
+
+      "vmhost" = {
+        hostname = "vmhost.dev.gregdom.net";
+        identityFile = "/home/greg/.ssh/keys/greg_homelab_auth.pub";
       };
 
       "github.com" = {
