@@ -24,6 +24,7 @@
   } @ inputs:
     let
       extensions = import ./extensions { inherit inputs; };
+      gregos = import ./profiles { inherit inputs; };
     in {
       nixosConfigurations = {
 
@@ -36,53 +37,125 @@
             inherit specialArgs;
             system = "x86_64-linux";
 
-            modules = [ 
-              ./system
-              ./hosts/${hostname}
-              ./users/${username}.nix
+            modules = [
+              # Import all profiles
+              gregos.base.nixosModules
+              gregos.desktop.nixosModules
+              gregos.development.nixosModules
 
+              # Enable profiles with feature flags
+              {
+                profiles.desktop.enable = true;
+                profiles.development = {
+                  enable = true;
+                  android.enable = true;
+                  reverseEngineering.enable = true;
+                  networkAnalysis.enable = true;
+                  virtualisation = {
+                    enable = true;
+                    backend = "docker";
+                  };
+                  bluetoothDev.enable = false;
+                };
+              }
+
+              # Host-specific
+              ./hosts/${hostname}
+              ./users/${username}
+
+              # Hardware modules
               nixos-hardware.nixosModules.framework-12th-gen-intel
               extensions.nixosModules
 
+              # Home-manager
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
 
-                home-manager.users.greg = import ./home/greg.nix;
+                home-manager.users.greg = {
+                  imports = [
+                    gregos.base.homeManagerModules
+                    gregos.desktop.homeManagerModules
+                    gregos.development.homeManagerModules
+                    ./users/${username}/home.nix
+                  ];
+
+                  profiles.desktop.enable = true;
+                  profiles.development.enable = true;
+                };
 
                 home-manager.sharedModules = [
                   plasma-manager.homeModules.plasma-manager
                   extensions.homeManagerModules
-                  ];
+                ];
               }
             ];
           };
 
-        grd-workstation = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+        grd-workstation = let
+          username = "greg";
+          hostname = "grd-workstation";
+          specialArgs = {inherit username hostname; };
+        in
+          nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+            system = "x86_64-linux";
 
-          modules = [
-            ./system
-            ./hosts/grd-workstation
-            ./users/greg.nix
+            modules = [
+              # Import all profiles
+              gregos.base.nixosModules
+              gregos.desktop.nixosModules
+              gregos.development.nixosModules
 
-            extensions.nixosModules
+              # Enable profiles with feature flags
+              {
+                profiles.desktop.enable = true;
+                profiles.development = {
+                  enable = true;
+                  android.enable = true;
+                  reverseEngineering.enable = true;
+                  networkAnalysis.enable = true;
+                  virtualisation = {
+                    enable = true;
+                    backend = "docker";
+                  };
+                  bluetoothDev.enable = true;
+                };
+              }
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+              # Host-specific
+              ./hosts/${hostname}
+              ./users/${username}
 
-              home-manager.users.greg = import ./home/greg.nix;
+              # Hardware modules
+              extensions.nixosModules
 
-              home-manager.sharedModules = [
-                plasma-manager.homeModules.plasma-manager
-                extensions.homeManagerModules
+              # Home-manager
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+
+                home-manager.users.greg = {
+                  imports = [
+                    gregos.base.homeManagerModules
+                    gregos.desktop.homeManagerModules
+                    gregos.development.homeManagerModules
+                    ./users/${username}/home.nix
+                  ];
+
+                  profiles.desktop.enable = true;
+                  profiles.development.enable = true;
+                };
+
+                home-manager.sharedModules = [
+                  plasma-manager.homeModules.plasma-manager
+                  extensions.homeManagerModules
                 ];
-            }
-          ];
-        };
+              }
+            ];
+          };
       };
     };
 }
