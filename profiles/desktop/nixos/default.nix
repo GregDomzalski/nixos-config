@@ -6,7 +6,11 @@ let
   cfg = config.profiles.desktop;
 in {
   options.profiles.desktop = {
-    enable = mkEnableOption "desktop environment profile";
+    enable = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable desktop environment profile";
+    };
 
     plasma = {
       enable = mkOption {

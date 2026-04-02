@@ -8,7 +8,7 @@ in {
   options.profiles.desktop = {
     enable = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = "Enable desktop home-manager profile";
     };
 

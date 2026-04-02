@@ -45,18 +45,7 @@
 
               # Enable profiles with feature flags
               {
-                profiles.desktop.enable = true;
-                profiles.development = {
-                  enable = true;
-                  android.enable = true;
-                  reverseEngineering.enable = true;
-                  networkAnalysis.enable = true;
-                  virtualisation = {
-                    enable = true;
-                    backend = "docker";
-                  };
-                  bluetoothDev.enable = false;
-                };
+                profiles.development.bluetoothDev.enable = false;
               }
 
               # Host-specific
@@ -80,9 +69,6 @@
                     gregos.development.homeManagerModules
                     ./users/${username}/home.nix
                   ];
-
-                  profiles.desktop.enable = true;
-                  profiles.development.enable = true;
                 };
 
                 home-manager.sharedModules = [
@@ -108,22 +94,6 @@
               gregos.desktop.nixosModules
               gregos.development.nixosModules
 
-              # Enable profiles with feature flags
-              {
-                profiles.desktop.enable = true;
-                profiles.development = {
-                  enable = true;
-                  android.enable = true;
-                  reverseEngineering.enable = true;
-                  networkAnalysis.enable = true;
-                  virtualisation = {
-                    enable = true;
-                    backend = "docker";
-                  };
-                  bluetoothDev.enable = true;
-                };
-              }
-
               # Host-specific
               ./hosts/${hostname}
               ./users/${username}
@@ -144,9 +114,6 @@
                     gregos.development.homeManagerModules
                     ./users/${username}/home.nix
                   ];
-
-                  profiles.desktop.enable = true;
-                  profiles.development.enable = true;
                 };
 
                 home-manager.sharedModules = [

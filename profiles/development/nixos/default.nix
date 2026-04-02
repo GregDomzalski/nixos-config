@@ -6,22 +6,42 @@ let
   cfg = config.profiles.development;
 in {
   options.profiles.development = {
-    enable = mkEnableOption "development tools profile";
+    enable = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable development tools profile";
+    };
 
     android = {
-      enable = mkEnableOption "Android development tools";
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable Android development tools";
+      };
     };
 
     reverseEngineering = {
-      enable = mkEnableOption "reverse engineering tools (Ghidra, ImHex)";
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable reverse engineering tools (Ghidra, ImHex)";
+      };
     };
 
     networkAnalysis = {
-      enable = mkEnableOption "network analysis tools (Wireshark)";
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable network analysis tools (Wireshark)";
+      };
     };
 
     virtualisation = {
-      enable = mkEnableOption "containerization tools";
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable containerization tools";
+      };
 
       backend = mkOption {
         type = types.enum [ "docker" "podman" ];
@@ -31,7 +51,11 @@ in {
     };
 
     bluetoothDev = {
-      enable = mkEnableOption "Bluetooth development tools (nRF)";
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable Bluetooth development tools (nRF)";
+      };
     };
   };
 
@@ -41,6 +65,7 @@ in {
     ./network-analysis.nix
     ./virtualisation.nix
     ./bluetooth-dev.nix
+    ./local-certs.nix
   ];
 
   config = mkIf cfg.enable {

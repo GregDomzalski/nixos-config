@@ -8,7 +8,7 @@ in {
   options.profiles.development = {
     enable = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
       description = "Enable development home-manager profile";
     };
 
