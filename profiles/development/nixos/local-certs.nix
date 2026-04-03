@@ -23,8 +23,8 @@ in {
   config = mkIf cfg.enable {
     # Install mkcert and NSS tools system-wide
     environment.systemPackages = with pkgs; [
-      mkcert  # Tool for creating locally-trusted development certificates
-      nss     # Provides certutil for managing Chromium's certificate database
+      mkcert    # Tool for creating locally-trusted development certificates
+      nss.tools # Provides certutil for managing Chromium's certificate database
     ];
 
     # Add mkcert CA to system PKI for OpenSSL-based tools (curl, git, etc.)
