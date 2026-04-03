@@ -121,7 +121,6 @@ in {
         grep = "rg";
         find = "fd";
         top = "btm";
-        cd = "z";
       };
 
       history = {
@@ -192,6 +191,7 @@ in {
     programs.zoxide = {
       enable = true;
       enableZshIntegration = true;
+      options = [ "--cmd cd" ];
     };
 
     programs.fzf = {
