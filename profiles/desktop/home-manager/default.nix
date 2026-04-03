@@ -67,6 +67,14 @@ in {
         description = "Enable Syncthing file synchronization";
       };
     };
+
+    xdgDirectories = {
+      enable = mkOption {
+        type = types.bool;
+        default = cfg.enable;
+        description = "Enable XDG directories with custom icons and Dolphin integration";
+      };
+    };
   };
 
   imports = [
@@ -77,6 +85,7 @@ in {
     ./obsidian.nix
     ./remmina.nix
     ./syncthing.nix
+    ./xdg-directories.nix
   ];
 
   config = mkIf cfg.enable {
