@@ -31,7 +31,7 @@
         grd-laptop = let
           username = "greg";
           hostname = "grd-laptop";
-          specialArgs = {inherit username hostname; };
+          specialArgs = {inherit inputs username hostname; };
         in
           nixpkgs.lib.nixosSystem {
             inherit specialArgs;
@@ -61,6 +61,7 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = specialArgs;
 
                 home-manager.users.greg = {
                   imports = [
@@ -82,7 +83,7 @@
         grd-workstation = let
           username = "greg";
           hostname = "grd-workstation";
-          specialArgs = {inherit username hostname; };
+          specialArgs = {inherit inputs username hostname; };
         in
           nixpkgs.lib.nixosSystem {
             inherit specialArgs;
@@ -106,6 +107,7 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = specialArgs;
 
                 home-manager.users.greg = {
                   imports = [
