@@ -43,6 +43,14 @@ in {
         description = "Enable Chromium browser with work apps";
       };
     };
+
+    creative = {
+      enable = mkOption {
+        type = types.bool;
+        default = cfg.enable;
+        description = "Enable creative applications (GIMP, Inkscape, Krita, Darktable)";
+      };
+    };
   };
 
   imports = [
@@ -50,6 +58,7 @@ in {
     ./claude-code.nix
     ./vscode.nix
     ./chromium.nix
+    ./creative.nix
   ];
 
   config = mkIf cfg.enable {

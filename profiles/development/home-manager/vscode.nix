@@ -57,6 +57,8 @@ in {
           };
 
           extensions = [
+            # pkgs.vscode-extensions.heaths.vscode-guid
+            # pkgs.vscode-extensions.mk12.better-git-line-blame
             pkgs.vscode-extensions.aaron-bond.better-comments
             pkgs.vscode-extensions.adpyke.codesnap
             pkgs.vscode-extensions.anthropic.claude-code
@@ -71,13 +73,13 @@ in {
             pkgs.vscode-extensions.editorconfig.editorconfig
             pkgs.vscode-extensions.foxundermoon.shell-format
             pkgs.vscode-extensions.github.vscode-github-actions
-            # pkgs.vscode-extensions.heaths.vscode-guid
             pkgs.vscode-extensions.jnoortheen.nix-ide
             pkgs.vscode-extensions.mhutchie.git-graph
-            # pkgs.vscode-extensions.mk12.better-git-line-blame
             pkgs.vscode-extensions.moshfeu.compare-folders
             pkgs.vscode-extensions.ms-azuretools.vscode-containers
             pkgs.vscode-extensions.ms-azuretools.vscode-docker
+            pkgs.vscode-extensions.ms-dotnettools.csharp
+            pkgs.vscode-extensions.ms-dotnettools.csdevkit
             pkgs.vscode-extensions.ms-vscode-remote.remote-containers
             pkgs.vscode-extensions.ms-vscode-remote.remote-containers
             pkgs.vscode-extensions.ms-vscode-remote.remote-ssh
