@@ -3,6 +3,12 @@
 let
   gregos = import ./lib;
 in {
+  overlays = {
+    default = final: prev: {
+      gregos = import ./pkgs { pkgs = final; };
+    };
+  };
+
   nixosModules = {
     imports = [
       ./modules/nixos/gpu.nix

@@ -38,6 +38,9 @@
             system = "x86_64-linux";
 
             modules = [
+              # Apply overlays
+              { nixpkgs.overlays = [ extensions.overlays.default ]; }
+
               # Import all profiles
               gregos.base.nixosModules
               gregos.desktop.nixosModules
@@ -90,6 +93,9 @@
             system = "x86_64-linux";
 
             modules = [
+              # Apply overlays
+              { nixpkgs.overlays = [ extensions.overlays.default ]; }
+
               # Import all profiles
               gregos.base.nixosModules
               gregos.desktop.nixosModules

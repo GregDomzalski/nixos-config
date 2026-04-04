@@ -14,14 +14,6 @@ let
     Status = "locked";
   };
 
-  icons = {
-    gmail = ../../../assets/icons/gmail.svg;
-    gchat = ../../../assets/icons/gchat.svg;
-    gcal = ../../../assets/icons/gcal.svg;
-    gmeet = ../../../assets/icons/gmeet.svg;
-    notion = ../../../assets/icons/notion.svg;
-  };
-
   # Detect if we're on a system with NVIDIA GPU
   isNvidia = config.hardware.gpu.vendor or null == "nvidia";
 
@@ -84,31 +76,31 @@ in {
       apps = {
         "Gmail" = {
           url = "mail.google.com";
-          icon = "${icons.gmail}";
+          icon = pkgs.gregos.logo-icons.gmail;
           categories = [ "X-CriticalShift" ];
         };
 
         "Google Chat" = {
           url = "chat.google.com";
-          icon = "${icons.gchat}";
+          icon = pkgs.gregos.logo-icons.gchat;
           categories = [ "X-CriticalShift" ];
         };
 
         "Google Calendar" = {
           url = "calendar.google.com";
-          icon = "${icons.gcal}";
+          icon = pkgs.gregos.logo-icons.gcal;
           categories = [ "X-CriticalShift" ];
         };
 
         "Google Meet" = {
           url = "meet.google.com";
-          icon = "${icons.gmeet}";
+          icon = pkgs.gregos.logo-icons.gmeet;
           categories = [ "X-CriticalShift" ];
         };
 
         "Notion" = {
           url = "notion.so";
-          icon = "${icons.notion}";
+          icon = pkgs.gregos.logo-icons.notion;
           categories = [ "X-CriticalShift" ];
         };
       };
